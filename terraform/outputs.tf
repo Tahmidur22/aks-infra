@@ -15,3 +15,7 @@ output "ingress_public_ip" {
   value = azurerm_public_ip.ingress_ip.ip_address
 }
 
+output "grafana_admin_password" {
+  value     = azurerm_key_vault_secret.grafana_admin_password.value
+  sensitive = true
+}

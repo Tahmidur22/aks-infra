@@ -2,6 +2,7 @@ resource "kubernetes_namespace" "cert_manager" {
   metadata {
     name = "cert-manager"
   }
+  depends_on = [module.aks]
 }
 
 resource "helm_release" "cert_manager" {

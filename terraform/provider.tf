@@ -14,7 +14,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.11.0"
+      version = "~> 2.23.0"
     }
   }
 
@@ -30,6 +30,7 @@ provider "azurerm" {
 }
 
 provider "kubernetes" {
+  # alias                  = "aks"
   host                   = module.aks.kube_config.host
   client_certificate     = base64decode(module.aks.kube_config.client_certificate)
   client_key             = base64decode(module.aks.kube_config.client_key)

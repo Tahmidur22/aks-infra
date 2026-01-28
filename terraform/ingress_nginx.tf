@@ -2,6 +2,7 @@ resource "kubernetes_namespace" "ingress_nginx" {
   metadata {
     name = "ingress-nginx"
   }
+  depends_on = [module.aks]
 }
 
 resource "helm_release" "nginx_ingress" {
@@ -42,7 +43,6 @@ resource "helm_release" "nginx_ingress" {
         minAvailable: 1
     EOT
   ]
-  
   depends_on = [
     kubernetes_namespace.ingress_nginx,
     azurerm_public_ip.ingress_ip
