@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: timer-app
-          image: akstestacraitjbd.azurecr.io/timer-app:latest
+          image: akstestacraitjbd.azurecr.io/timer-app:initial
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:

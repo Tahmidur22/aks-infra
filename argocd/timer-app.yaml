@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: timer-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: app=akstestacraitjbd.azurecr.io/timer-app
+    argocd-image-updater.argoproj.io/app.update-strategy: latest
+    argocd-image-updater.argoproj.io/app.allow-tags: regexp:^[a-f0-9]{40}$
+    argocd-image-updater.argoproj.io/write-back-method: git
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Tahmidur22/aks-infra.git
+    targetRevision: main
+    path: k8s
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
