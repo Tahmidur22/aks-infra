@@ -4,7 +4,7 @@ metadata:
   name: timer-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: app=akstestacraitjbd.azurecr.io/timer-project
+    argocd-image-updater.argoproj.io/image-list: timer-app=akstestacraitjbd.azurecr.io/timer-project
     argocd-image-updater.argoproj.io/app.update-strategy: latest
     argocd-image-updater.argoproj.io/app.allow-tags: regexp:^[a-f0-9]{40}$
     argocd-image-updater.argoproj.io/write-back-method: git
