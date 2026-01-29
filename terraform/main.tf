@@ -46,7 +46,11 @@ resource "azurerm_role_assignment" "acr_pull" {
   scope                = module.acr.acr_id
   role_definition_name = "AcrPull"
   principal_id         = module.aks.kubelet_identity
-  depends_on           = [module.aks]
+  depends_on           = [module.aks, module.acr]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_user_assigned_identity" "grafana" {
