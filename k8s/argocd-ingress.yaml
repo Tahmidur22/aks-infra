@@ -1,26 +1,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-ingress
-  namespace: monitoring
+  name: argocd-ingress
+  namespace: argocd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns-cloudflare
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    external-dns.alpha.kubernetes.io/hostname: grafana.tahmidur-chow.com
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - grafana.tahmidur-chow.com
-      secretName: grafana-tls
+        - argocd.tahmidur-chow.com
+      secretName: argocd-tls
   rules:
-    - host: grafana.tahmidur-chow.com
+    - host: argocd.tahmidur-chow.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: kube-prometheus-stack-grafana
+                name: argocd-server
                 port:
                   number: 80
